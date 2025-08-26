@@ -138,12 +138,13 @@ def main():
         # Menu lateral para páginas
         page = st.sidebar.radio("Selecione a página:", ["Análises", "Gráficos"])
         
-        if page == "Análises":
+        if page == "📝 Análises e Estatísticas":
             page_analises(df)
-        elif page == "Gráficos":
+        elif page == "📊 Gráficos":
             page_graficos(df)
 
 if __name__ == "__main__":
     main()
+
 
 
