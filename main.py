@@ -130,7 +130,7 @@ def page_graficos(df):
 def main():
     st.markdown('<div class="title-box">Explorador XLSX</div>', unsafe_allow_html=True)
     
-    uploaded_file = st.file_uploader("Faça o upload do seu arquivo XLSX", type=["xlsx", "xls"])
+    uploaded_file = st.file_uploader("Faça o upload do seu arquivo XLSX", type=["xlsx"])
     
     if uploaded_file is not None:
         df, sheet_name = load_data(uploaded_file)
@@ -145,4 +145,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
