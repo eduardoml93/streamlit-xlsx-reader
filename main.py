@@ -52,9 +52,8 @@ def page_analises(df):
     st.write("**Valores Nulos por Coluna:**")
     st.write(df.isnull().sum())
 
-    # st.write("**Número de Registros Duplicados:**")
-    # st.write(df.duplicated().sum())
-    num_duplicados = st.session_state.df.duplicated().sum()
+    # Número de registros duplicados
+    num_duplicados = df.duplicated().sum()
     st.metric(label="Número de Registros Duplicados", value=num_duplicados)
 
     st.write("**Número de Valores Únicos por Coluna:**")
@@ -130,21 +129,20 @@ def page_graficos(df):
 def main():
     st.markdown('<div class="title-box">Explorador XLSX</div>', unsafe_allow_html=True)
     
-    uploaded_file = st.file_uploader("Faça o upload do seu arquivo XLSX", type=["xlsx"])
+    uploaded_file = st.file_uploader("Faça o upload do seu arquivo Excel", type=["xls", "xlsx"])
     
     if uploaded_file is not None:
         df, sheet_name = load_data(uploaded_file)
+        # Armazenar o DataFrame no session_state
+        st.session_state.df = df  
 
         # Menu lateral para páginas
-        page = st.sidebar.radio("Selecione a página:", ["Análises", "Gráficos"])
+        page = st.sidebar.radio("Selecione a página:", ["📝 Análises e Estatísticas", "📊 Gráficos"])
         
         if page == "📝 Análises e Estatísticas":
-            page_analises(df)
+            page_analises(st.session_state.df)
         elif page == "📊 Gráficos":
-            page_graficos(df)
+            page_graficos(st.session_state.df)
 
 if __name__ == "__main__":
     main()
-
-
-
